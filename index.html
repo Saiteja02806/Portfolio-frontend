@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sai — Senior Java / Backend Developer (Frontend Portfolio)</title>
+  <meta name="description" content="Sai — Java backend developer. Portfolio showcasing projects, architecture, and clean frontend design." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0f172a">
+
+  <style>
+    /* -------------------------
+       Variables & Reset
+       ------------------------- */
+    :root{
+      --bg-1: 12 18 38; /* dark RGB for background */
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.04);
+      --accent: 200 120 255; /* purple-ish */
+      --accent-2: 30 200 255; /* cyan-ish */
+      --muted: rgba(255,255,255,0.75);
+      --radius: 14px;
+      --max-width: 1100px;
+      --card-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      --glass-border: rgba(255,255,255,0.08);
+      font-synthesis: none;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body,#root{height:100%}
+    body{
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(circle at 10% 10%, rgba(var(--accent),0.08), transparent 10%),
+                  radial-gradient(circle at 90% 90%, rgba(var(--accent-2),0.06), transparent 12%),
+                  linear-gradient(180deg, rgba(var(--bg-1),1) 0%, #020617 100%);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding: 48px 24px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+
+    /* -------------------------
+       Container
+       ------------------------- */
+    .wrap{
+      width:100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-bottom:28px;
+    }
+
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:52px;height:52px;border-radius:12px;
+      background: linear-gradient(135deg, rgba(var(--accent),0.98), rgba(var(--accent-2),0.9));
+      display:flex;align-items:center;justify-content:center;
+      box-shadow: 0 6px 18px rgba(33,10,60,0.5);
+      font-weight:700;color:white;font-family:"Space Grotesk",sans-serif;
+      transform: translateZ(0);
+    }
+    .brand h1{font-size:16px;line-height:1;color:var(--muted)}
+    .brand p{font-size:12px;color:rgba(230,238,248,0.6)}
+
+    nav {display:flex; gap:10px; align-items:center;}
+    .nav-btn{
+      background:transparent;border:1px solid transparent;padding:8px 12px;border-radius:10px;
+      color:rgba(230,238,248,0.88);font-weight:600;font-size:14px;cursor:pointer;
+      transition:all .22s ease;
+    }
+    .nav-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+    .cta{
+      background: linear-gradient(90deg, rgba(var(--accent),0.95), rgba(var(--accent-2),0.95));
+      color:#021; padding:10px 14px;border-radius:12px;font-weight:700;
+      border:none;cursor:pointer;box-shadow: 0 10px 30px rgba(79,54,130,0.24);
+    }
+
+    /* -------------------------
+       Hero
+       ------------------------- */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:stretch;
+      margin-bottom:36px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding:28px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+
+    .hero-left{padding:36px}
+    .eyebrow{color:rgba(230,238,248,0.7);font-weight:600;font-size:13px;margin-bottom:12px}
+    .title{
+      font-family:"Space Grotesk",sans-serif;
+      font-size:34px;color:white;line-height:1.02;margin-bottom:10px;
+      letter-spacing:-0.02em;
+    }
+    .title .accent{
+      background: linear-gradient(90deg, rgba(var(--accent),1), rgba(var(--accent-2),1));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .lead{color:rgba(230,238,248,0.78);margin-bottom:18px;font-size:15px;max-width:54ch}
+
+    .hero-actions{display:flex;gap:12px;align-items:center;margin-top:12px}
+    .btn-outline{
+      padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);
+      background:transparent;color:var(--muted);cursor:pointer;font-weight:600;
+    }
+    .socials{display:flex;gap:10px;margin-left:6px}
+    .s-btn{width:44px;height:44px;border-radius:10px;background:var(--glass-2);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+
+    /* right panel */
+    .hero-right{
+      display:flex;flex-direction:column;gap:18px;align-items:stretch;
+      justify-content:center;padding:18px;
+    }
+    .summary{
+      display:flex;gap:12px;align-items:center;
+    }
+    .avatar{
+      width:92px;height:92px;border-radius:16px;background:linear-gradient(180deg,#fff2, #fff1);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:"Space Grotesk",sans-serif;color:white;font-size:28px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .info h3{margin-bottom:6px;font-size:18px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);font-size:13px}
+
+    /* -------------------------
+       Projects grid
+       ------------------------- */
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin:10px 0 18px 0}
+    .subtitle{color:rgba(230,238,248,0.7);font-size:13px}
+    .projects{
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:18px;
+    }
+    .project-card{
+      overflow:hidden;border-radius:12px;position:relative;padding:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:transform .24s ease, box-shadow .24s;
+    }
+    .project-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(0,0,0,0.5)}
+    .project-media{
+      height:160px;background:linear-gradient(120deg, rgba(var(--accent),0.12), rgba(var(--accent-2),0.10));
+      display:flex;align-items:center;justify-content:center;font-weight:700;font-family:"Space Grotesk";font-size:22px;color:white;
+    }
+    .project-body{padding:14px}
+    .project-body h4{font-size:16px;margin-bottom:6px}
+    .project-body p{font-size:13px;color:rgba(230,238,248,0.7);margin-bottom:10px}
+    .project-meta{display:flex;justify-content:space-between;align-items:center}
+
+    /* -------------------------
+       Footer
+       ------------------------- */
+    footer{margin-top:36px;text-align:center;color:rgba(230,238,248,0.6);font-size:13px;padding-bottom:20px}
+
+    /* -------------------------
+       Modal (project detail)
+       ------------------------- */
+    .modal-backdrop{
+      position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.85));display:none;align-items:center;justify-content:center;z-index:60;
+    }
+    .modal{
+      width:92%;max-width:900px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;padding:22px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 30px 60px rgba(2,6,23,0.8);
+      transform:translateY(12px);opacity:0;transition:opacity .18s ease, transform .22s ease;
+    }
+    .modal.show{transform:translateY(0);opacity:1}
+    .modal-grid{display:grid;grid-template-columns: 1fr 340px;gap:18px;align-items:start}
+    .modal-media{height:300px;border-radius:10px;background:linear-gradient(120deg, rgba(var(--accent),0.15), rgba(var(--accent-2),0.12));display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-family:"Space Grotesk";font-size:18px}
+    .modal-content h3{margin-bottom:12px}
+    .modal-actions{display:flex;gap:10px;margin-top:16px}
+    .pill{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);font-size:13px}
+
+    /* -------------------------
+       Responsive
+       ------------------------- */
+    @media (max-width:1100px){
+      .hero{grid-template-columns:1fr}
+      .projects{grid-template-columns: repeat(2,1fr)}
+      .modal-grid{grid-template-columns: 1fr}
+    }
+    @media (max-width:700px){
+      body{padding:28px 16px}
+      .projects{grid-template-columns:1fr}
+      .title{font-size:26px}
+      .hero-right{order: -1}
+      .hero-left{padding:18px}
+    }
+
+    /* small animation */
+    .float { animation: floaty 6s ease-in-out infinite; }
+    @keyframes floaty {
+      0% { transform: translateY(0) }
+      50% { transform: translateY(-6px) }
+      100% { transform: translateY(0) }
+    }
+
+    /* focus for accessible keyboard nav */
+    button:focus, a:focus {outline: 3px solid rgba(var(--accent-2),0.18); outline-offset:2px}
+  </style>
+</head>
+<body>
+  <div class="wrap" id="root">
+    <!-- Header -->
+    <header>
+      <div class="brand" aria-hidden="false">
+        <div class="logo float">S</div>
+        <div>
+          <h1>Sai Srisaiteja</h1>
+          <p>Backend-focused Java dev — I ship reliable systems & beautiful frontends</p>
+        </div>
+      </div>
+
+      <nav aria-label="main navigation">
+        <button class="nav-btn" onclick="scrollToSection('projects')">Projects</button>
+        <button class="nav-btn" onclick="scrollToSection('about')">About</button>
+        <a class="nav-btn" href="#contact" aria-label="Contact">Contact</a>
+        <a class="cta" href="/resume.pdf" download>Download Resume</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="card hero-left" role="region" aria-labelledby="heroTitle">
+        <div class="eyebrow">Featured — Systems, APIs, and frontends</div>
+        <h2 id="heroTitle" class="title">I build <span class="accent">scalable backends</span> and designs that people remember.</h2>
+        <p class="lead">I combine clean architecture, performance-first engineering, and polished UI to deliver product-ready systems. Open to roles in backend & platform engineering.</p>
+
+        <div class="hero-actions">
+          <button class="cta" onclick="scrollToSection('projects')">View Projects</button>
+          <button class="btn-outline" onclick="downloadResume()">Quick CV</button>
+
+          <div class="socials" aria-hidden="false">
+            <a class="s-btn" title="GitHub" href="https://github.com/" target="_blank" rel="noopener noreferrer">GH</a>
+            <a class="s-btn" title="LinkedIn" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">in</a>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div class="pill">Java</div>
+            <div class="pill">Spring Boot</div>
+            <div class="pill">Microservices</div>
+            <div class="pill">Docker</div>
+            <div class="pill">React</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card hero-right" aria-label="summary">
+        <div class="summary">
+          <div class="avatar" aria-hidden="true">SS</div>
+          <div class="info">
+            <h3>Sai Srisaiteja</h3>
+            <div style="color:rgba(230,238,248,0.7)">Java | Spring Boot | Systems</div>
+            <div class="chips" aria-hidden="true" style="margin-top:8px">
+              <div class="chip">Open to work</div>
+              <div class="chip">Seeking backend roles</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px">
+          <div style="font-weight:700;margin-bottom:8px">Quick stats</div>
+          <div style="display:flex;gap:12px">
+            <div style="flex:1;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;text-align:center">
+              <div style="font-size:18px;font-weight:800">5+</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.6)">Years experience</div>
+            </div>
+            <div style="flex:1;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;text-align:center">
+              <div style="font-size:18px;font-weight:800">20+</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.6)">Projects shipped</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px">
+          <div style="font-weight:700;margin-bottom:8px">Contact</div>
+          <button class="btn-outline" onclick="location.href='mailto:your.email@example.com?subject=Hello%20Sai'">Email me</button>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" style="margin-bottom:8px">
+      <div class="section-title">
+        <div>
+          <div class="subtitle">Selected work</div>
+          <h3 style="margin-top:6px">Projects that highlight architecture & polish</h3>
+        </div>
+        <div style="color:rgba(255,255,255,0.65);font-size:13px">Hover a card to preview — click to open case study</div>
+      </div>
+
+      <div class="projects" role="list">
+        <!-- Project 1 -->
+        <article class="project-card" role="listitem" tabindex="0" onclick="openModal(1)" onkeypress="if(event.key==='Enter') openModal(1)">
+          <div class="project-media">OrderFlow — Scalable Orders</div>
+          <div class="project-body">
+            <h4>OrderFlow (Microservices)</h4>
+            <p>High-throughput order processing with resilient retries, idempotency and observability.</p>
+            <div class="project-meta">
+              <div style="font-size:13px;color:rgba(255,255,255,0.7)">Java · Spring Boot · Kafka</div>
+              <div style="font-size:13px">Live • Git</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card" role="listitem" tabindex="0" onclick="openModal(2)" onkeypress="if(event.key==='Enter') openModal(2)">
+          <div class="project-media">PayScale — Secure Payments</div>
+          <div class="project-body">
+            <h4>PayScale</h4>
+            <p>PCI-lite payment orchestration with tokenization and robust testing pipeline.</p>
+            <div class="project-meta">
+              <div style="font-size:13px;color:rgba(255,255,255,0.7)">Spring Boot · Redis · Docker</div>
+              <div style="font-size:13px">Demo • Repo</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card" role="listitem" tabindex="0" onclick="openModal(3)" onkeypress="if(event.key==='Enter') openModal(3)">
+          <div class="project-media">InsightDash — Monitoring</div>
+          <div class="project-body">
+            <h4>InsightDash</h4>
+            <p>Lightweight monitoring dashboard with event streaming, alerting and charts.</p>
+            <div class="project-meta">
+              <div style="font-size:13px;color:rgba(255,255,255,0.7)">React · Node · WebSockets</div>
+              <div style="font-size:13px">Live • Repo</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- About & Philosophy -->
+    <section id="about" style="margin-top:28px">
+      <div class="card" style="padding:22px;">
+        <div style="display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap">
+          <div style="flex:1;min-width:260px">
+            <h3 style="margin-bottom:8px">About me</h3>
+            <p style="color:rgba(230,238,248,0.8);max-width:66ch">
+              I design and build backend systems that are understandable, observable, and maintainable — but I care deeply about the product experience.
+              My approach: start with the user & error cases, design simple contracts (APIs), then iterate with telemetry and tests.
+            </p>
+            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+              <div class="chip">System Design</div>
+              <div class="chip">API Design</div>
+              <div class="chip">CI/CD</div>
+              <div class="chip">Performance Tuning</div>
+            </div>
+          </div>
+
+          <div style="width:320px">
+            <h4 style="margin-bottom:8px">Quick links</h4>
+            <ul style="list-style:none;padding-left:0;color:rgba(230,238,248,0.8)">
+              <li><a href="#" style="color:inherit;text-decoration:underline">API Postman collection</a></li>
+              <li><a href="#" style="color:inherit;text-decoration:underline">Detailed case study: OrderFlow</a></li>
+              <li><a href="#" style="color:inherit;text-decoration:underline">Blog: performance tuning</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="margin-top:28px">
+      <div class="card">
+        <h3>Contact</h3>
+        <p style="color:rgba(230,238,248,0.78);margin-bottom:12px">No backend? No problem — click to email me directly or download my resume.</p>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="cta" onclick="location.href='mailto:your.email@example.com?subject=Opportunity'">Email Sai</button>
+          <a class="btn-outline" href="/resume.pdf" download>Download resume</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Built with care • © <span id="year"></span> Sai Srisaiteja — Crafted for clarity & scale
+    </footer>
+  </div>
+
+  <!-- Modal: project details (no backend required) -->
+  <div id="modalBackdrop" class="modal-backdrop" tabindex="-1" aria-hidden="true">
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <h3 id="modalTitle">Project</h3>
+        <div>
+          <button class="btn-outline" onclick="closeModal()" aria-label="Close modal">Close</button>
+        </div>
+      </div>
+
+      <div class="modal-grid">
+        <div>
+          <div id="modalMedia" class="modal-media">Screenshot</div>
+          <div style="margin-top:12px">
+            <h4 id="modalSub">Subheadline</h4>
+            <p id="modalDesc" style="color:rgba(230,238,248,0.8)">Full project description goes here: problem, approach, architecture decisions, results, and how to run locally. Replace this text with your case study content.</p>
+          </div>
+        </div>
+
+        <aside>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="card" style="padding:12px;">
+              <div style="font-weight:700">Tech</div>
+              <div style="margin-top:8px;color:rgba(230,238,248,0.8)" id="modalTech">Java · Spring Boot · Kafka</div>
+            </div>
+
+            <div class="card" style="padding:12px;">
+              <div style="font-weight:700">Links</div>
+              <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+                <a id="modalLive" href="#" target="_blank" rel="noopener noreferrer" class="pill">Live demo</a>
+                <a id="modalRepo" href="#" target="_blank" rel="noopener noreferrer" class="pill">Repository</a>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:8px">
+              <button class="cta" onclick="openInNew('https://github.com')">View Repo</button>
+              <button class="btn-outline" onclick="closeModal()">Close</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Small utilities
+    const yearEl = document.getElementById('year'); yearEl.textContent = new Date().getFullYear();
+
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    function downloadResume(){
+      // placeholder: link to resume in the repo root. Update to your real path.
+      window.location.href = '/resume.pdf';
+    }
+
+    // Modal data for projects (client-side; no backend)
+    const projects = {
+      1: {
+        title: "OrderFlow — Scalable Orders",
+        sub: "Resilient microservice pipeline for high throughput orders",
+        desc: "OrderFlow processes thousands of orders per minute with at-least-once delivery guarantees. Key features: idempotent handlers, message deduplication, compact events, and real-time metrics. Architected to degrade gracefully on external API failures and to support blue/green deploys.",
+        tech: "Java · Spring Boot · Kafka · Prometheus · Grafana",
+        live: "#",
+        repo: "#",
+        media: "System diagram / screenshot"
+      },
+      2: {
+        title: "PayScale — Payment Orchestration",
+        sub: "Secure tokenized payments with test harnesses",
+        desc: "PayScale centralizes payment routing with tokenized card storage and circuit-breakers. Implemented contract tests, local emulators for gateways, and a CI pipeline with security scanning.",
+        tech: "Spring Boot · Redis · Docker · Pact",
+        live: "#",
+        repo: "#",
+        media: "Payment flow screenshot"
+      },
+      3: {
+        title: "InsightDash — Monitoring",
+        sub: "Event-driven observability dashboard",
+        desc: "InsightDash ingests event streams, computes rolling aggregates, and surfaces anomalies. Built a lightweight alerting engine and a simple websocket-powered frontend for near realtime updates.",
+        tech: "React · Node · WebSockets · InfluxDB",
+        live: "#",
+        repo: "#",
+        media: "Dashboard screenshot"
+      }
+    };
+
+    // open modal
+    const backdrop = document.getElementById('modalBackdrop');
+    const modal = document.getElementById('modal');
+    function openModal(id){
+      const p = projects[id];
+      if(!p) return;
+      document.getElementById('modalTitle').textContent = p.title;
+      document.getElementById('modalSub').textContent = p.sub;
+      document.getElementById('modalDesc').textContent = p.desc;
+      document.getElementById('modalTech').textContent = p.tech;
+      document.getElementById('modalLive').href = p.live;
+      document.getElementById('modalRepo').href = p.repo;
+      document.getElementById('modalMedia').textContent = p.media;
+
+      backdrop.style.display = 'flex';
+      backdrop.setAttribute('aria-hidden','false');
+      setTimeout(()=> modal.classList.add('show'), 10);
+
+      // trap focus
+      modal.focus();
+      document.addEventListener('keydown', handleKey);
+    }
+
+    function closeModal(){
+      modal.classList.remove('show');
+      backdrop.setAttribute('aria-hidden','true');
+      setTimeout(()=>{ backdrop.style.display = 'none' }, 220);
+      document.removeEventListener('keydown', handleKey);
+    }
+
+    function handleKey(e){
+      if(e.key === 'Escape') closeModal();
+    }
+
+    backdrop.addEventListener('click', (ev)=>{
+      if(ev.target === backdrop) closeModal();
+    });
+
+    function openInNew(url){ window.open(url, "_blank", "noopener,noreferrer"); }
+
+    // Small accessibility improvement: keyboard reveal for project cards
+    document.querySelectorAll('.project-card').forEach(pc=>{
+      pc.addEventListener('keyup', (e)=>{
+        if(e.key === 'Enter') pc.click();
+      });
+    });
+  </script>
+</body>
+</html>
